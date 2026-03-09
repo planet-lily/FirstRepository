@@ -1,5 +1,6 @@
 package com.example.logicalop
 
+import android.R.attr.name
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -39,7 +40,61 @@ class MainActivity : AppCompatActivity() {
         cbBanned = findViewById(R.id.cbBanned)
         btnCheck = findViewById(R.id. btnCheck)
         tvResult = findViewById(R.id.tvResult)
-        
+
+
+        //button to run the code when it is pressed
+        btnCheck.setOnClickListener {
+
+
+            //get the user's name from editText
+        val name = edtName.text.toString()
+
+            //convert age into a number (int)
+            val age = edtAge.text.toString().toInt()
+
+
+        //check if the checkboxes are selected ( true or false )
+            val isITstudent = cbITStudent.isChecked
+            val isStaff = cbStaff.isChecked
+            val isBanned = cbBanned.isChecked
+
+            if(((age >= 18 && isITstudent) || isStaff) && !isBanned)
+
+                    //if the condition above is true
+                        tvResult.text = "Congratulations $name! You qualify for the student tech discount"
+
+        } else
+
+            // if the condition above is false
+        tvResult.text = "Sorry $name, you do not qualify for the discount"
+
+        /*
+        Logical condition explanation
+
+        Step 1:
+        (age>= 18 && isITstudent )
+        >= means greater than or equal to
+        && means AND (both conditions must be true
+
+        so this checks if the user is 18 or older and is an IT student
+
+        Step 2 :
+        || means OR ( only one condition needs to be true)
+
+        This means the person can qualify if they are a staff member even if the are not an IT student
+
+        Step 3:
+        ! means NOT ( it reverses the value)
+        !isBanned means the person must not be banned
+
+        Example
+        isBanned = false
+        !false = true 
+
+
+         */
+
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
